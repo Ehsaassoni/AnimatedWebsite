@@ -7,7 +7,7 @@ const ThemeContext = createContext<{
   toggleTheme: () => void;
 } | null>(null);
 
-const STORAGE_KEY = "apex-steel-theme";
+const STORAGE_KEY = "ehsaas-steel-theme";
 
 function getInitialTheme(): Theme {
   if (typeof window === "undefined") return "dark";

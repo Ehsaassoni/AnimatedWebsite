@@ -38,11 +38,11 @@ export default function Footer() {
                 fill="#08090a"
               />
             </svg>
-            Apex Steel
+            Ehsaas Steel
           </div>
 
           <p style={{ fontSize: 13, color: "var(--text-faint)", margin: 0 }}>
-            © {new Date().getFullYear()} Apex Steel Manufacturing &amp; Trading
+            © {new Date().getFullYear()} Ehsaas Steel Manufacturing &amp; Trading
             Co. All rights reserved.
           </p>
 

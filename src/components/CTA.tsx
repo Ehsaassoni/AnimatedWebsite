@@ -61,7 +61,7 @@ export default function CTA() {
               flexWrap: "wrap",
             }}
           >
-            <a href="mailto:sales@apexsteel.example" className="btn btn-primary">
+            <a href="mailto:sales@ehsaassteel.example" className="btn btn-primary">
               Request a Quote →
             </a>
             <a href="tel:+10000000000" className="btn btn-ghost">

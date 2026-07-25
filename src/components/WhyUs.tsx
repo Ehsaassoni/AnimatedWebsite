@@ -56,7 +56,7 @@ export default function WhyUs() {
     <section className="section" id="why">
       <div className="container" style={{ textAlign: "center" }}>
         <span className="eyebrow" style={{ justifyContent: "center" }}>
-          Why Apex Steel
+          Why Ehsaas Steel
         </span>
         <h2 className="h2" style={{ marginTop: 18, maxWidth: 620, marginInline: "auto" }}>
           Six fundamentals. One steel partner.

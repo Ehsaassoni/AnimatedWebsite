@@ -5,7 +5,7 @@ import ThemeToggle from "./ThemeToggle";
 const LINKS = [
   { label: "Products", href: "#products" },
   { label: "Industries", href: "#industries" },
-  { label: "Why Apex", href: "#why" },
+  { label: "Why Ehsaas", href: "#why" },
   { label: "Process", href: "#process" },
   { label: "Contact", href: "#contact" },
 ];
@@ -72,7 +72,7 @@ export default function Nav() {
               fill="#08090a"
             />
           </svg>
-          Apex&nbsp;Steel
+          Ehsaas&nbsp;Steel
         </a>
 
         <nav
