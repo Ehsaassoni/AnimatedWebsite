@@ -228,6 +228,7 @@ img {
   background: var(--overlay-med);
   border: 1px solid var(--panel-border);
   backdrop-filter: blur(10px);
+  max-width: 100%;
 }
 
 .pill-cta input {
@@ -238,6 +239,8 @@ img {
   font-size: 14.5px;
   padding: 10px 8px 10px 16px;
   width: 220px;
+  min-width: 0;
+  flex: 1 1 auto;
   font-family: inherit;
 }
 

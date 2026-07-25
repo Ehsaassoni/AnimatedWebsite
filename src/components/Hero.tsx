@@ -32,12 +32,14 @@ export default function Hero() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          width: "100%",
         }}
       >
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
+          style={{ width: "100%" }}
         >
           <div
             className="mono"
