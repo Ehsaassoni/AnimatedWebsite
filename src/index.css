@@ -14,6 +14,35 @@
   --radius: 20px;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --overlay-soft: rgba(255, 255, 255, 0.04);
+  --overlay-med: rgba(255, 255, 255, 0.07);
+  --overlay-border-hover: rgba(255, 255, 255, 0.28);
+  --scrim: rgba(8, 8, 15, 0.6);
+  --nav-bg-scrolled: rgba(8, 8, 15, 0.7);
+  --dot-color: #e6e6f7;
+}
+
+:root[data-theme="light"] {
+  --bg: #f7f7fb;
+  --bg-elevated: #ffffff;
+  --panel: rgba(10, 10, 30, 0.03);
+  --panel-border: rgba(10, 10, 30, 0.1);
+  --text: #14141f;
+  --text-dim: #52526b;
+  --text-faint: #82829c;
+  --accent: #5b5bf0;
+  --accent-bright: #4a3ee0;
+  --accent-dim: #c7c7ff;
+  --steel: #5b6b85;
+  --line: rgba(10, 10, 30, 0.09);
+
+  --overlay-soft: rgba(10, 10, 30, 0.035);
+  --overlay-med: rgba(10, 10, 30, 0.06);
+  --overlay-border-hover: rgba(10, 10, 30, 0.22);
+  --scrim: rgba(255, 255, 255, 0.68);
+  --nav-bg-scrolled: rgba(247, 247, 251, 0.75);
+  --dot-color: #4a3ee0;
 }
 
 * {
@@ -31,6 +60,7 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 #root {
@@ -137,14 +167,14 @@ img {
 }
 
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--overlay-soft);
   border-color: var(--panel-border);
   color: var(--text);
 }
 
 .btn-ghost:hover {
-  border-color: rgba(255, 255, 255, 0.24);
-  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--overlay-border-hover);
+  background: var(--overlay-med);
 }
 
 .card {
@@ -195,7 +225,7 @@ img {
   gap: 6px;
   padding: 6px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--overlay-med);
   border: 1px solid var(--panel-border);
   backdrop-filter: blur(10px);
 }

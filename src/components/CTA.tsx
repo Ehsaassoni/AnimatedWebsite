@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import { motion } from "framer-motion";
+import SteelScene from "../three/SteelScene";
 
 export default function CTA() {
   return (
@@ -17,6 +19,19 @@ export default function CTA() {
             overflow: "hidden",
           }}
         >
+          <div
+            aria-hidden
+            style={{
+              position: "absolute",
+              inset: 0,
+              opacity: 0.3,
+              pointerEvents: "none",
+            }}
+          >
+            <Suspense fallback={null}>
+              <SteelScene />
+            </Suspense>
+          </div>
           <div
             style={{
               position: "absolute",

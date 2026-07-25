@@ -79,7 +79,7 @@ export default function AssemblyShowcase() {
               gap: 7,
               padding: "6px 12px",
               borderRadius: 999,
-              background: "rgba(8,8,15,0.6)",
+              background: "var(--scrim)",
               border: "1px solid var(--panel-border)",
               backdropFilter: "blur(8px)",
             }}
@@ -106,7 +106,7 @@ export default function AssemblyShowcase() {
               display: "flex",
               justifyContent: "space-between",
               borderTop: "1px solid var(--panel-border)",
-              background: "rgba(8,8,15,0.55)",
+              background: "var(--scrim)",
               backdropFilter: "blur(10px)",
             }}
           >

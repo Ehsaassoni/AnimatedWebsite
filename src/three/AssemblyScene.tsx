@@ -1,6 +1,7 @@
 import { useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { useTheme } from "../theme/ThemeContext";
 
 const CYCLE = 9;
 const HOLD_END = 0.9;
@@ -98,7 +99,7 @@ function lerp(a: number, b: number, t: number) {
   return a + (b - a) * t;
 }
 
-function Beam({ m }: { m: Member }) {
+function Beam({ m, color }: { m: Member; color: string }) {
   const ref = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
@@ -133,9 +134,9 @@ function Beam({ m }: { m: Member }) {
     <mesh ref={ref} castShadow receiveShadow>
       <boxGeometry args={m.size} />
       <meshStandardMaterial
-        color="#8fa3c7"
-        metalness={0.85}
-        roughness={0.32}
+        color={color}
+        metalness={0.5}
+        roughness={0.45}
         transparent
         opacity={0}
       />
@@ -143,7 +144,7 @@ function Beam({ m }: { m: Member }) {
   );
 }
 
-function Rig() {
+function Rig({ color }: { color: string }) {
   const members = useMemo(() => buildMembers(), []);
   const group = useRef<THREE.Group>(null);
 
@@ -155,13 +156,16 @@ function Rig() {
   return (
     <group ref={group}>
       {members.map((m, i) => (
-        <Beam key={i} m={m} />
+        <Beam key={i} m={m} color={color} />
       ))}
     </group>
   );
 }
 
 export default function AssemblyScene() {
+  const { theme } = useTheme();
+  const beamColor = theme === "light" ? "#526080" : "#8fa3c7";
+
   return (
     <Canvas
       shadows
@@ -169,11 +173,12 @@ export default function AssemblyScene() {
       camera={{ position: [3.6, 1.4, 4.6], fov: 32 }}
       gl={{ antialias: true, alpha: true }}
     >
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.85} />
       <directionalLight position={[4, 6, 3]} intensity={1.5} castShadow />
+      <directionalLight position={[-4, -3, -2]} intensity={0.6} />
       <pointLight position={[-3, -1.5, -2]} intensity={5} color="#5b5bf0" />
       <pointLight position={[3, -2, 2.5]} intensity={2.8} color="#4f7df0" />
-      <Rig />
+      <Rig color={beamColor} />
     </Canvas>
   );
 }

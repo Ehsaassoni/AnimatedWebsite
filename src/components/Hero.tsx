@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import SteelScene from "../three/SteelScene";
 import Starfield from "./Starfield";
 
+const TAGS = ["Precision engineered", "Rapid dispatch", "Full traceability", "Zero-compromise QA"];
+
 export default function Hero() {
   const [email, setEmail] = useState("");
 
@@ -37,15 +39,24 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <h1 className="h1" style={{ maxWidth: 760 }}>
+          <div
+            className="mono"
+            style={{ fontSize: 13, color: "var(--text-dim)", letterSpacing: "0.14em" }}
+          >
+            Precision. Speed. Reliability.
+          </div>
+          <h1 className="h1" style={{ maxWidth: 760, marginTop: 16 }}>
             Command your steel supply chain.
           </h1>
           <p
             className="lede"
-            style={{ marginTop: 20, maxWidth: 520, marginInline: "auto" }}
+            style={{ marginTop: 20, maxWidth: 560, marginInline: "auto" }}
           >
             Structural steel, pipes, sheets, coils and bars — manufactured to
-            spec and delivered to your schedule, every time.
+            spec and delivered to your schedule, every time. Every section is
+            rolled and cut to millimetre tolerance, so what leaves our mill
+            matches your drawings exactly — less rework, less waste, faster
+            builds.
           </p>
 
           <div
@@ -69,6 +80,34 @@ export default function Hero() {
                 Request a quote
               </a>
             </form>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: 10,
+              marginTop: 28,
+            }}
+          >
+            {TAGS.map((tag) => (
+              <span
+                key={tag}
+                className="mono"
+                style={{
+                  fontSize: 11,
+                  color: "var(--text-faint)",
+                  padding: "7px 14px",
+                  borderRadius: 999,
+                  border: "1px solid var(--panel-border)",
+                  background: "var(--overlay-soft)",
+                  letterSpacing: "0.08em",
+                }}
+              >
+                {tag}
+              </span>
+            ))}
           </div>
         </motion.div>
 

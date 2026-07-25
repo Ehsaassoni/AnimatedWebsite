@@ -405,7 +405,7 @@ export default function Products() {
 
       <style>{`
         .rail-item span.mono { letter-spacing: 0.12em; }
-        .rail-item:hover span:first-child { border-color: rgba(255,255,255,0.3) !important; }
+        .rail-item:hover span:first-child { border-color: var(--overlay-border-hover) !important; }
         @media (max-width: 780px) {
           .products-layout { grid-template-columns: 1fr !important; }
           .rail { flex-direction: row !important; flex-wrap: wrap; gap: 10px !important; order: -1; justify-content: center; }

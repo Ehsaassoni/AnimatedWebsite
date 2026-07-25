@@ -1,13 +1,18 @@
 import { useEffect, useRef } from "react";
+import { useTheme } from "../theme/ThemeContext";
 
 export default function Starfield() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    const dotColor = theme === "dark" ? "#e6e6f7" : "#6b6b95";
+    const alphaScale = theme === "dark" ? 1 : 0.55;
 
     let raf: number;
     let width = 0;
@@ -44,8 +49,8 @@ export default function Starfield() {
       ctx.clearRect(0, 0, width, height);
       for (const s of stars) {
         const flicker = 0.5 + 0.5 * Math.sin(t / 1400 + s.tw);
-        ctx.globalAlpha = s.a * (0.55 + 0.45 * flicker);
-        ctx.fillStyle = "#e6e6f7";
+        ctx.globalAlpha = s.a * (0.55 + 0.45 * flicker) * alphaScale;
+        ctx.fillStyle = dotColor;
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
@@ -62,7 +67,17 @@ export default function Starfield() {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);
     };
-  }, []);
+  }, [theme]);
+
+  const bgGradient =
+    theme === "dark"
+      ? "radial-gradient(60% 50% at 50% 10%, rgba(91,91,240,0.16), transparent 65%), radial-gradient(50% 40% at 80% 60%, rgba(60,50,120,0.14), transparent 70%), #08080f"
+      : "radial-gradient(60% 50% at 50% 10%, rgba(91,91,240,0.09), transparent 65%), radial-gradient(50% 40% at 80% 60%, rgba(120,100,220,0.07), transparent 70%), #f7f7fb";
+
+  const vignette =
+    theme === "dark"
+      ? "radial-gradient(120% 90% at 50% 0%, transparent 40%, rgba(8,8,15,0.9) 100%)"
+      : "radial-gradient(120% 90% at 50% 0%, transparent 40%, rgba(247,247,251,0.9) 100%)";
 
   return (
     <div
@@ -74,23 +89,9 @@ export default function Starfield() {
         pointerEvents: "none",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(60% 50% at 50% 10%, rgba(91,91,240,0.16), transparent 65%), radial-gradient(50% 40% at 80% 60%, rgba(60,50,120,0.14), transparent 70%), #08080f",
-        }}
-      />
+      <div style={{ position: "absolute", inset: 0, background: bgGradient }} />
       <canvas ref={canvasRef} style={{ width: "100%", height: "100%", position: "absolute", inset: 0 }} />
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(120% 90% at 50% 0%, transparent 40%, rgba(8,8,15,0.9) 100%)",
-        }}
-      />
+      <div style={{ position: "absolute", inset: 0, background: vignette }} />
     </div>
   );
 }

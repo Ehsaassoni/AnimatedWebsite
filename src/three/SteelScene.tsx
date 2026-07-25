@@ -1,30 +1,17 @@
 import { useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-
-function makeDotTexture() {
-  const size = 64;
-  const canvas = document.createElement("canvas");
-  canvas.width = size;
-  canvas.height = size;
-  const ctx = canvas.getContext("2d")!;
-  const grad = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
-  grad.addColorStop(0, "rgba(255,255,255,1)");
-  grad.addColorStop(0.4, "rgba(220,220,255,0.7)");
-  grad.addColorStop(1, "rgba(220,220,255,0)");
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, size, size);
-  return new THREE.CanvasTexture(canvas);
-}
+import { useTheme } from "../theme/ThemeContext";
+import { getScenePalette, makeDotTexture } from "./palette";
 
 const RINGS = 6;
 const VERTICALS = 16;
 const RADIUS = 2.1;
 const HEIGHT = 1.6;
 
-function LatticeRing() {
+function LatticeRing({ palette }: { palette: ReturnType<typeof getScenePalette> }) {
   const group = useRef<THREE.Group>(null);
-  const dotTexture = useMemo(() => makeDotTexture(), []);
+  const dotTexture = useMemo(() => makeDotTexture(palette.dot), [palette.dot]);
 
   const { ringLines, vertLines, joints } = useMemo(() => {
     const ringLines: THREE.BufferGeometry[] = [];
@@ -77,16 +64,16 @@ function LatticeRing() {
         <line key={`r${i}`}>
           <primitive object={geo} attach="geometry" />
           <lineBasicMaterial
-            color={i === 0 || i === RINGS - 1 ? "#a9a9ff" : "#5b5bf0"}
+            color={i === 0 || i === RINGS - 1 ? palette.lineBright : palette.lineBase}
             transparent
-            opacity={i === 0 || i === RINGS - 1 ? 0.85 : 0.32}
+            opacity={(i === 0 || i === RINGS - 1 ? 0.85 : 0.32) * palette.opacityMult}
           />
         </line>
       ))}
       {vertLines.map((geo, i) => (
         <line key={`v${i}`}>
           <primitive object={geo} attach="geometry" />
-          <lineBasicMaterial color="#7c7cff" transparent opacity={0.22} />
+          <lineBasicMaterial color={palette.lineFaint} transparent opacity={0.22 * palette.opacityMult} />
         </line>
       ))}
       <points geometry={joints}>
@@ -95,24 +82,27 @@ function LatticeRing() {
           size={0.075}
           transparent
           depthWrite={false}
-          blending={THREE.AdditiveBlending}
-          color="#e8e8ff"
+          blending={palette.blending}
+          color={palette.dot}
         />
       </points>
     </group>
   );
 }
 
-function Glow() {
+function Glow({ color }: { color: string }) {
   return (
     <mesh>
       <sphereGeometry args={[0.4, 24, 24]} />
-      <meshBasicMaterial color="#5b5bf0" transparent opacity={0.12} />
+      <meshBasicMaterial color={color} transparent opacity={0.12} />
     </mesh>
   );
 }
 
 export default function SteelScene() {
+  const { theme } = useTheme();
+  const palette = useMemo(() => getScenePalette(theme), [theme]);
+
   return (
     <Canvas
       dpr={[1, 1.75]}
@@ -120,8 +110,8 @@ export default function SteelScene() {
       gl={{ antialias: true, alpha: true }}
     >
       <ambientLight intensity={0.4} />
-      <LatticeRing />
-      <Glow />
+      <LatticeRing palette={palette} />
+      <Glow color={palette.glow} />
     </Canvas>
   );
 }

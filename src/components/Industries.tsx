@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import { motion } from "framer-motion";
+import NetworkScene from "../three/NetworkScene";
 
 const AUDIENCE = [
   "Builders & Developers",
@@ -11,8 +13,22 @@ const AUDIENCE = [
 
 export default function Industries() {
   return (
-    <section className="section" id="industries">
-      <div className="container" style={{ textAlign: "center" }}>
+    <section className="section" id="industries" style={{ position: "relative", overflow: "hidden" }}>
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.55,
+          pointerEvents: "none",
+        }}
+      >
+        <Suspense fallback={null}>
+          <NetworkScene />
+        </Suspense>
+      </div>
+
+      <div className="container" style={{ position: "relative", textAlign: "center" }}>
         <span className="eyebrow" style={{ justifyContent: "center" }}>
           Who we serve
         </span>
@@ -47,6 +63,7 @@ export default function Industries() {
                 alignItems: "center",
                 gap: 10,
                 borderRadius: 999,
+                backdropFilter: "blur(6px)",
               }}
             >
               <span

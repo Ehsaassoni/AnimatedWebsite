@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import { motion } from "framer-motion";
+import ProcessScene from "../three/ProcessScene";
 
 const STEPS = [
   { n: "01", title: "Spec & Quote", body: "Share drawings or specs — we quote grades, sections and lead times within 24 hours." },
@@ -21,11 +23,25 @@ export default function Process() {
         </div>
 
         <div
+          className="card"
+          style={{
+            height: 180,
+            marginTop: 48,
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <Suspense fallback={null}>
+            <ProcessScene />
+          </Suspense>
+        </div>
+
+        <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
             gap: 24,
-            marginTop: 56,
+            marginTop: 40,
             position: "relative",
           }}
           className="process-grid"

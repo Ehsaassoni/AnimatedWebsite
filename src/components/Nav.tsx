@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const LINKS = [
   { label: "Products", href: "#products" },
@@ -27,7 +28,7 @@ export default function Nav() {
         zIndex: 50,
         borderBottom: "1px solid",
         borderColor: scrolled ? "var(--line)" : "transparent",
-        background: scrolled ? "rgba(8,8,15,0.7)" : "transparent",
+        background: scrolled ? "var(--nav-bg-scrolled)" : "transparent",
         backdropFilter: scrolled ? "blur(14px)" : "none",
         transition: "background 0.25s ease, border-color 0.25s ease",
       }}
@@ -78,10 +79,11 @@ export default function Nav() {
           ))}
         </nav>
 
-        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+        <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
           <a href="tel:+10000000000" style={{ fontSize: 14.5, color: "var(--text-dim)" }} className="nav-link">
             Call Sales
           </a>
+          <ThemeToggle />
           <a href="#contact" className="btn btn-primary" style={{ padding: "9px 20px" }}>
             Get a Quote
           </a>
@@ -92,7 +94,7 @@ export default function Nav() {
         .nav-link { transition: color 0.15s ease; }
         .nav-link:hover { color: var(--text); }
         @media (max-width: 860px) {
-          .nav-links { display: none; }
+          .nav-links { display: none !important; }
         }
       `}</style>
     </header>
